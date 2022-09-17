@@ -1,7 +1,7 @@
-/dist
-/node_modules
-/.vscode/*
-/.angular/*
+dist
+node_modules
+.angular
+.vscode
 *.log
 
 
