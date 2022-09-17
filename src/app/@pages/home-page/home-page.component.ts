@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss'],
+    templateUrl: './home-page.component.html',
+    styleUrls: ['./home-page.component.scss'],
 })
-export class HomePage  {
-  constructor() {}
+export class HomePage {
+    constructor() {}
 }
