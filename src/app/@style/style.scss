@@ -1,3 +1,8 @@
+@font-face {
+    font-family: PlovdivDisplay-Regular;
+    src: url("./fonts/PlovdivDisplay-Regular.otf");
+}
+
 :root {
     --black: #000;
     --black05: rgba(0, 0, 0, 0.5);
@@ -15,4 +20,8 @@
     --color4: #244C66;
     --color5: #407D6C;
     --color6: #7DB290;
+}
+
+* {
+    font-family: 'PlovdivDisplay-Regular';
 }

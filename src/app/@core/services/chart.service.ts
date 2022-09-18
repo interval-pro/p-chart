@@ -6,6 +6,7 @@ export enum ECANDLES {
     CANDLES = "CANDLES",
     HEIKIN_ASHI= "HEIKIN_ASHI",
 }
+
 export enum EMARKETS {
     BTCUSDT = "BTCUSDT",
     ETHUSDT = "ETHUSDT",
@@ -13,7 +14,7 @@ export enum EMARKETS {
     LTCUSDT = "LTCUSDT",
     ETCUSDT = "ETCUSDT",
 
-};
+}
 
 export enum EINTERVALS {
     "1m" = "1m",

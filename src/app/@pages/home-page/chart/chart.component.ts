@@ -48,9 +48,8 @@ export class ChartComponent implements OnInit {
     }
 
     private createChart() {
-        if (this.chartContainer.childNodes[1]) {
-            this.renderer2.removeChild(this.chartContainer, this.chartContainer.childNodes[1]);
-        }
+        const childNode = this.chartContainer.childNodes[1];
+        if (childNode) this.renderer2.removeChild(this.chartContainer, childNode);
         this.seriesService.removeExistingSeries();
         const chart = createChart(this.chartContainer, chartOptions);
         this.chartService.createChart(chart);
