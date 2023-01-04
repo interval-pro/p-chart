@@ -1,0 +1,60 @@
+.windows-wrapper {
+    background-color: var(--background1);
+    width: 50rem;
+    height: 35rem;
+    box-shadow: 0 0 1rem 0.1rem var(--black05);
+    padding: 1rem;
+    .indicators {
+        user-select: none;
+        select.indicator-list {
+            background-color: var(--color2);
+        }
+    }
+
+    .settings {
+        padding: 1rem 0;
+        select.indicator-type {
+            background-color: var(--color4);
+        }
+    }
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem;
+        button {
+            background-color: var(--color6);
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    }
+}
+
+.custom-input {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    color: var(--color1);
+    height: 2rem;
+    .prefix {
+        margin-right: 1rem;
+    }
+    input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid var(--color1);
+        height: 100%;
+        color: var(--color1);
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+select.custom-select {
+    width: 100%;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+}

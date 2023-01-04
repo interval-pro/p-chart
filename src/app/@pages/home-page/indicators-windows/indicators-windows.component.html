@@ -1,0 +1,53 @@
+<div class="windows-wrapper" (click)="preventAll($event)">
+    <div class="indicators">
+        <select
+            class="custom-select indicator-list"
+            [(ngModel)]="selectedIndicatorIndex"
+        >
+            <option
+                *ngFor='let indicator of indicators; let i = index'
+                [value]="i"
+            > {{ indicator.name }}</option>
+            <option [value]="-1 | number"> Create New Indicator </option>
+        </select>
+    </div>
+    <div class="settings">
+        <select
+            class="custom-select indicator-type"
+            [(ngModel)]="selectedIndicatorCode"
+        >
+            <option
+                *ngFor='let type of indicatorsTypeList | keyvalue'
+                [value]="type.value.code"
+            >
+                {{ type.key }} - {{ type.value.full }} ({{ type.value.series }} Series)
+            </option>
+        </select>
+        <div class="custom-input">
+            <div class="prefix">Name: </div>
+            <input type="text" [(ngModel)]="indicatorName"/>
+        </div>
+        <div class="custom-input">
+            <div class="prefix">Value: </div>
+            <input type="number" step="1" [(ngModel)]="indicatorValue" />
+        </div>
+        <div class="custom-input">
+            <div class="prefix">Line Width: </div>
+            <input type="number" step="1" [(ngModel)]="indicatorLineWidth" />
+        </div>
+        <div class="custom-input">
+            <div class="prefix">Color: </div>
+            <input type="text" [(ngModel)]="indicatorLineColor" />
+        </div>
+    </div>
+    <div class="buttons">
+        <button
+            *ngIf="selectedIndicatorIndex === -1"
+            (click)='addIndicator()'
+        >ADD</button>
+        <button 
+            *ngIf="selectedIndicatorIndex !== -1" 
+            (click)='editIndicator()'
+        >UPDATE</button>
+    </div>
+</div>

@@ -3,6 +3,11 @@
     src: url("./fonts/PlovdivDisplay-Regular.otf");
 }
 
+@font-face {
+    font-family: PlovdivSans;
+    src: url("./fonts/PlovdivSans.otf");
+}
+
 :root {
     --black: #000;
     --black05: rgba(0, 0, 0, 0.5);

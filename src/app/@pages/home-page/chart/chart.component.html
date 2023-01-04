@@ -1,34 +1,63 @@
 <div class="chart-container">
-    <div class="options-line">
-        <select #selectMarket (change)="onMarketChange(selectMarket.value)">
-            <option
-                *ngFor="let market of marketsList"
-                (value)="market"
-                [selected]="market === 'ETHUSDT'"
+    <div class="options">
+        <div class="line">
+            <select #selectMarket (change)="onMarketChange(selectMarket.value)">
+                <option
+                    *ngFor="let market of marketsList"
+                    (value)="market"
+                    [selected]="market === 'ETHUSDT'"
+                >
+                   {{ market }}
+                </option>
+            </select>
+            <select
+                #selectInterval
+                (change)="onIntervalChange(selectInterval.value)"
             >
-               {{ market }}
-            </option>
-        </select>
-        <select
-            #selectInterval
-            (change)="onIntervalChange(selectInterval.value)"
-        >
-            <option
-                *ngFor="let interval of intervalsList"
-                (value)="interval"
-                [selected]="interval === '1h'"
+                <option
+                    *ngFor="let interval of intervalsList"
+                    (value)="interval"
+                    [selected]="interval === '1h'"
+                >
+                   {{ interval }}
+                </option>
+            </select>
+            <select
+                #selectCandlesType
+                (change)="onCandlesChange(selectCandlesType.value)"
             >
-               {{ interval }}
-            </option>
-        </select>
-        <select
-            #selectCandlesType
-            (change)="onCandlesChange(selectCandlesType.value)"
-        >
-            <option value="CANDLES" [selected]="true">Candles</option>
-            <option value="HEIKIN_ASHI" [selected]="false">Heikin Ashi</option>
-        </select>
-        <button>New Indicator</button>
-        <div class="loading-data" *ngIf="loadingData"></div>
+                <option value="CANDLES" [selected]="true">Candles</option>
+                <option value="HEIKIN_ASHI" [selected]="false">Heikin Ashi</option>
+            </select>
+            <button (click)="toggleIndicatorWindow()">New Indicator</button>
+            <div class="loading-data" *ngIf="loadingData"></div>
+        </div>
+        <div class="indicators-list">
+            <div class="indicator" *ngFor="let indicator of indicators">
+                <div class="info">
+                    <div
+                        class="more"
+                        [ngStyle]="{ color: indicator.lineStyle.color }"
+                    >{{ indicator.config.value }}#{{ indicator.base.short }}</div>
+                    <div class="name">{{ indicator.name }}</div>
+                </div>
+                <input
+                    class="custom-slider"
+                    type="range"
+                    min="1"
+                    max="500"
+                    (input)="changeIndicatorValue($event, indicator)"
+                >
+            </div>
+        </div>
     </div>
+
+</div>
+
+<div
+    class="indicators-windows"
+    *ngIf="isIndicatorWindowsOpened"
+    (click)="toggleIndicatorWindow()"
+>
+    <indicators-windows (onClose)="toggleIndicatorWindow()"></indicators-windows>
 </div>

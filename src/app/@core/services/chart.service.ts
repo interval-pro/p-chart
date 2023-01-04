@@ -13,7 +13,7 @@ export enum EMARKETS {
     ADAUSDT = "ADAUSDT",
     LTCUSDT = "LTCUSDT",
     ETCUSDT = "ETCUSDT",
-
+    ETHBTC = "ETHBTC",
 }
 
 export enum EINTERVALS {
@@ -40,6 +40,7 @@ export const chartOptions: DeepPartial<ChartOptions> = {
         text: "P-Chart",
         visible: true,
         fontSize: 120,
+        fontFamily: 'PlovdivSans',
     },
     layout: {
         backgroundColor: "rgba(0, 0, 0, 0.9)",

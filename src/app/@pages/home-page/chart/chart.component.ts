@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { createChart } from 'lightweight-charts';
 import { chartOptions, ChartService, ECANDLES, EINTERVALS, EMARKETS } from 'src/app/@core/services/chart.service';
-import { DataService } from 'src/app/@core/services/data.service';
+import { DataService, IData } from 'src/app/@core/services/data.service';
+import { IIndicator, IndicatorsService } from 'src/app/@core/services/indicators.service';
 import { SeriesService } from 'src/app/@core/services/series.service';
 
 @Component({
@@ -17,12 +18,15 @@ export class ChartComponent implements OnInit {
         if (this.chartService.chart) this.chartService.chart.resize(offsetWidth, offsetHeight, true)
     }
 
+    public isIndicatorWindowsOpened: boolean = false;
+
     constructor(
         private elRef: ElementRef,
         private renderer2: Renderer2,
         private chartService: ChartService,
         private seriesService: SeriesService,
         private dataService: DataService,
+        private indicatorsService: IndicatorsService,
     ) {}
 
     get chartContainer() {
@@ -42,9 +46,30 @@ export class ChartComponent implements OnInit {
         return this.dataService.inProcess;
     }
 
+    get indicators() {
+        return this.indicatorsService.indicators;
+    }
+
     ngOnInit(): void {
         this.createChart();
-        this.dataService.chartData$.subscribe(d => this.seriesService.onDataChange(d));
+        this.dataService.chartData$.subscribe(d => {
+            this.seriesService.onDataChange(d);
+            this.indicatorsService.onDataChange(d);
+        });
+
+        this.dataService.lastCandleData$.subscribe((d) => {
+            if (!d) return;
+            const existingData = this.dataService.chartData;
+            const series = this.seriesService.candleStickseries;
+            if (!series) return;
+            console.log(d);
+            if (d.isClosed) {
+                const newData = [...existingData, d];
+                this.dataService.chartData = newData;
+            } else {
+                series.update(d)
+            }
+        });
     }
 
     private createChart() {
@@ -68,5 +93,14 @@ export class ChartComponent implements OnInit {
     onCandlesChange(value: string) {
         this.chartService.selectedCandlesType = value as ECANDLES;
         this.seriesService.reloadCandles();
+    }
+
+    toggleIndicatorWindow() {
+        this.isIndicatorWindowsOpened = !this.isIndicatorWindowsOpened;
+    }
+
+    changeIndicatorValue(event: any, indicator: IIndicator) {
+        const value = parseFloat(event.target.value);
+        this.indicatorsService.changeLineIndicatorValue(indicator, value);
     }
 }
