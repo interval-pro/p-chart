@@ -103,4 +103,7 @@ export class ChartComponent implements OnInit {
         const value = parseFloat(event.target.value);
         this.indicatorsService.changeLineIndicatorValue(indicator, value);
     }
+    closeIndicator(indicator: IIndicator) {
+        this.indicatorsService.removeIndicator(indicator);
+    }
 }

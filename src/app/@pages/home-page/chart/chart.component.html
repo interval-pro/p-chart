@@ -34,6 +34,7 @@
         </div>
         <div class="indicators-list">
             <div class="indicator" *ngFor="let indicator of indicators">
+                <p class='close' (click)="closeIndicator(indicator)">X</p>
                 <div class="info">
                     <div
                         class="more"
@@ -46,6 +47,7 @@
                     type="range"
                     min="1"
                     max="500"
+                    [(ngModel)]="indicator.config.value"
                     (input)="changeIndicatorValue($event, indicator)"
                 >
             </div>

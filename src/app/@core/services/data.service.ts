@@ -34,8 +34,8 @@ export class DataService {
     }
 
     set chartData(candles: IData[]) {
-        this.chartData$.next(candles);
         this._chartData = candles;
+        this.chartData$.next(candles);
     }
 
     get inProcess() {
@@ -56,7 +56,7 @@ export class DataService {
             .then(data => data.map(this.binanceCandlesMapping))
             .catch(() => []);
         this.chartData = !firstCandleTime ? [...data] : [...data, ...this.chartData];
-
+        
         if (getFirst) this.subscribeToLast(symbol, interval);
         this.inProcess = false;
     }

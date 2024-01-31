@@ -71,6 +71,16 @@
             flex-direction: row-reverse;
             height: 2rem;
             align-items: center;
+            .close {
+                color: red;
+                margin: 0 0.5rem;
+                padding: 0 0.5rem;
+                cursor: pointer;
+                &:hover {
+                    background-color: red;
+                    color: white;
+                }
+            }
             .info {
                 font-size: 0.85rem;
                 height: 100%;

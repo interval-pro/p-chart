@@ -79,6 +79,7 @@ export class ChartService {
     selectedInterval: EINTERVALS = EINTERVALS["1h"];
     selectedMarket: EMARKETS = EMARKETS.ETHUSDT;
     selectedCandlesType: ECANDLES = ECANDLES.CANDLES;
+    onlyExpandChart: boolean = false;
 
     constructor(
         private dataService: DataService,
@@ -98,6 +99,8 @@ export class ChartService {
     }
 
     createChart(chart: IChartApi) {
+        this.onlyExpandChart = false;
+
         this.chart = chart;
         this.dataService.retrieveData(this.selectedMarket, this.selectedInterval);
         this.chart.timeScale()
@@ -106,6 +109,7 @@ export class ChartService {
                 const { from, to } = timeRange;
                 const firstCandleTime = this.dataService.chartData?.[0]?.time;
                 if (firstCandleTime === from) {
+                    this.onlyExpandChart = true;
                     this.dataService.retrieveData(this.selectedMarket, this.selectedInterval, false);
                 }
             });

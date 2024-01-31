@@ -74,7 +74,15 @@ export class IndicatorsService {
     ) {}
 
     onDataChange(data: IData[]) {
-        console.log(`On Data Change`)
+        console.log(`On Data Change`);
+        this.indicators.forEach((indicator) => {
+            if (this.chartService.onlyExpandChart) {
+                this.removeIndicator(indicator);
+            } else {
+                this.indicators = this.indicators.filter((item) => item !== indicator);
+            }
+            this.addIndicator(indicator);
+        });
     }
 
     private createSeries(indicator: IIndicatorRaw) {
@@ -92,6 +100,11 @@ export class IndicatorsService {
 
     editIndicator() {
 
+    }
+
+    removeIndicator(indicator: IIndicator) {
+        this.indicators = this.indicators.filter((item) => item !== indicator);
+        this.chartService.chart?.removeSeries(indicator.series);
     }
 
     private buildIndicator(rawIndicator: IIndicatorRaw) {
